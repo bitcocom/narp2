@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.bit.mybatis.MemberMapper">
+  
+    <select id="memberList" resultType="memberVO">
+       select * from member1
+    </select>
+    
+    <insert id="memberInsert" parameterType="memberVO">
+        insert into member1(id, pass, name, age, email, phone)
+        values(
+        #{id},
+        #{pass},
+        #{name},
+        #{age},
+        #{email},
+        #{phone}
+        )       
+    </insert>
+    
+    <insert id="memberInsertFile" parameterType="memberVO">
+        insert into member1(id, pass, name, age, email, phone, filename)
+        values(
+        #{id},
+        #{pass},
+        #{name},
+        #{age},
+        #{email},
+        #{phone},
+        #{filename}
+        )       
+    </insert>
+        
+    <delete id="memberDelete" parameterType="Integer">  
+        delete from member1 where num=#{num}
+    </delete>
+    
+    <select id="memberContent" parameterType="Integer" resultType="memberVO">        
+        select * from member1 where num=#{num}
+    </select>
+    
+    <update id="memberUpdate" parameterType="memberVO">
+         update member1 
+         set age=#{age}, email=#{email}, phone=#{phone} 
+         where num=#{num}	 
+    </update>
+    
+    <select id="memberLogin" parameterType="memberVO" resultType="String">
+        select name from member1 where id=#{id} and pass=#{pass}       
+    </select>
+  
+    <select id="memberDbcheck" resultType="String" parameterType="String">
+        select id from member1 where id=#{id}        
+    </select>
+    
+    <update id="memberDeleteFile" parameterType="Integer">
+        update member1 set filename='' where num=#{num}        
+    </update>
+    
+    <update id="memberUpdateFile" parameterType="memberVO">
+        update member1 
+        set age=#{age}, email=#{email}, phone=#{phone}, filename=#{filename}  
+        where num=#{num}  
+    </update>
+</mapper>
